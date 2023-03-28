@@ -30,12 +30,12 @@ end
 figure
 ylim([180 260])
 xlim([-80 80])
-set(gca, 'XTick', [-80 0 80]);
+set(gca, 'XTick', [-80 -40 0 40 80], 'YTick', [180,260]);
 meanData = mean(reacT,3);
 seData = std(reacT,[],3)./sqrt(nMice);
 plotData = cat(3, meanData, meanData-seData, meanData+seData);
 plt.rowsOfGrid(visRef(1,:)*100, plotData*1000, plt.selectRedBlueColors([-60 0 60]));
 axis square
 ylabel('Reaction time (ms)')
-xlabel('Visual contrast')
+xlabel('Visual contrast (%)')
 end
