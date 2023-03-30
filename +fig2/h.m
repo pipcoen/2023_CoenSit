@@ -54,9 +54,14 @@ fprintf('Done inactivation shuffles... \n');
 glmsCont_Test = [{cGLMs}; tstGLMs];
 gridsTest = cellfun(@(x) prc.getGridsFromBlock(x.blockData), glmsCont_Test{2}, 'uni', 0);
 fracRightTurns = squeeze(mean(cell2mat(cellfun(@(x) permute(x.fracRightTurns,[3,1,2]), gridsTest, 'uni', 0)),1));
+
+%account for trial with 100% right turns
+satIdx = fracRightTurns==1;
+numTrialsAtSaturation = mean(cell2mat(cellfun(@(x) x.numTrials(satIdx), gridsTest, 'uni', 0)));
+fracRightTurns(satIdx) = numTrialsAtSaturation/(numTrialsAtSaturation+1);
 fracRightTurns = log10(fracRightTurns./(1-fracRightTurns));
 fprintf('Done behaviour grid extraction... \n');
-%%
+
 figure;
 box off
 hold on

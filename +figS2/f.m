@@ -30,7 +30,7 @@ yDat = loglikDat.simpEmp_Cross5;
 xlim([0 0.55]);
 ylim([0 0.55]);
 xlabel('Additive model (bits/trial)')
-ylabel('Nonparametric additive model (bits/trial)')
+ylabel('Unconstrained additive model (bits/trial)')
 axis square;
 plot([0,0.55], [0,0.55], '--k')
 
