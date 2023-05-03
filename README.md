@@ -1,7 +1,7 @@
 # 2023_CoenSit
 
 Code to replicate the figures from Coen, Sit, et al--2023.
-Code comments and exampels may be updated compared to the cited veresion on Zenodo. 
+Code comments and examples may be updated compared to the cited version on Zenodo. 
 
 ## Matlab instructions
 
