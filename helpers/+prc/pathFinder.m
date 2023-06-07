@@ -1,4 +1,4 @@
-function [pathOut, directoryCheck] = pathFinder(pathType, pathInfo)
+function pathOut = pathFinder(pathType, pathInfo)
 %% A funciton to return various paths used in processing and anlysis. Changes in file struture should be reflected here.
 % INPUTS(default values)
 % pathType(required)-------------A string to indicate the requested path. Can be a cell with multiple strings.
@@ -46,10 +46,10 @@ for i = 1:size(subject,1)
             case 'processedfolder'; pathOut{i,j} = [dataLocation subject{i}];                           %local processed data folder
             case 'processeddata'; pathOut{i,j} = [dataLocation processedFileName];                      %local processed data file
 
-            case 'explist'; pathOut{i,j} = [dataLocation 'expList.mat'];                                %the master list of experiments
-            case 'ephysrecord'; pathOut{i,j} = [dataLocation 'ePhysRecord.mat'];                        %an excel sheet with ephys records
-            case 'ephysrecordnp2'; pathOut{i,j} = [dataLocation 'ephysrecordNP2.mat'];                        %an excel sheet with ephys records
-            case 'allenatlas'; pathOut{i,j} = [driveName '\Dropbox (Neuropixels)\MouseData\Atlas\allenCCF\']; %local allan atlas directory
+            case 'explist'; pathOut{i,j} = [dataLocation 'XSupData\expList.mat'];                                %the master list of experiments
+            case 'ephysrecord'; pathOut{i,j} = [dataLocation 'XSupData\ePhysRecord.mat'];                        %an excel sheet with ephys records
+            case 'ephysrecordnp2'; pathOut{i,j} = [dataLocation 'XSupData\ephysrecordNP2.mat'];                        %an excel sheet with ephys records
+            case 'allenatlas'; pathOut{i,j} = [dataLocation 'XSupData\Atlas\allenCCF\']; %local allan atlas directory
             case 'probepath'; pathOut{i,j} = [dataLocation 'XHistology\' subject{i} '\probe_histIdx' expNum{i}];  %probe vectors estimated from histology
         end
     end
