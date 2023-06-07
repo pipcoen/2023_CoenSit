@@ -18,7 +18,6 @@ if ~exist('pathInfo', 'var'); [pathInfo.subject, pathInfo.expDate, pathInfo.expN
 if ~isfield(pathInfo, 'subject'); subject = 'noDataGiven'; else, subject = pathInfo.subject;  end
 if ~isfield(pathInfo, 'expDate'); expDate = 'noDataGiven'; else, expDate = pathInfo.expDate;  end
 if ~isfield(pathInfo, 'expNum'); expNum = 'noDataGiven'; else, expNum = pathInfo.expNum;  end
-if ~isfield(pathInfo, 'datNum'); datNum = 'noDataGiven'; else, datNum = pathInfo.datNum;  end
 
 if isnumeric(expNum); expNum = num2str(expNum); end
 if isnumeric(expDate); expDate =  datestr(expDate, 'yyyy-mm-dd'); end
@@ -27,7 +26,6 @@ if ~iscell(pathType); pathType = {pathType}; end
 if ~iscell(subject); subject = {subject}; end
 if ~iscell(expDate); expDate = {expDate}; end
 if ~iscell(expNum); expNum = {expNum}; end
-if ~iscell(datNum); datNum = {datNum}; end
 
 %% Make initial directory decisions based on dates and the computer that the program is running on.
 %Assign the drive name and directoryCheck depending on where Pip keeps his dropbox
