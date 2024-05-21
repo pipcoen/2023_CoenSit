@@ -64,6 +64,7 @@ end
 
 contBlk = prc.filtBlock(iBlk, iBlk.tri.inactivation.laserType == 0);
 uniBlk = prc.filtBlock(iBlk, iBlk.tri.inactivation.laserType == 1);
+disp(['Total Laser Trials = ' num2str(uniBlk.tot.trials)]);
 [~, gridXY] = prc.makeGrid(uniBlk, uniBlk.tri.outcome.responseCalc, [], 'galvouni',2);
 
 %Use some matrix tricks to create "uniformLaserFilters" which is a filter for each shuffle that equalizes the frequency of subjects

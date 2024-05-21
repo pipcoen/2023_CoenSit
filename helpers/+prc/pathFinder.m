@@ -1,4 +1,4 @@
-function [pathOut, directoryCheck] = pathFinder(pathType, pathInfo)
+function pathOut = pathFinder(pathType, pathInfo)
 %% A funciton to return various paths used in processing and anlysis. Changes in file struture should be reflected here.
 % INPUTS(default values)
 % pathType(required)-------------A string to indicate the requested path. Can be a cell with multiple strings.
@@ -18,7 +18,6 @@ if ~exist('pathInfo', 'var'); [pathInfo.subject, pathInfo.expDate, pathInfo.expN
 if ~isfield(pathInfo, 'subject'); subject = 'noDataGiven'; else, subject = pathInfo.subject;  end
 if ~isfield(pathInfo, 'expDate'); expDate = 'noDataGiven'; else, expDate = pathInfo.expDate;  end
 if ~isfield(pathInfo, 'expNum'); expNum = 'noDataGiven'; else, expNum = pathInfo.expNum;  end
-if ~isfield(pathInfo, 'datNum'); datNum = 'noDataGiven'; else, datNum = pathInfo.datNum;  end
 
 if isnumeric(expNum); expNum = num2str(expNum); end
 if isnumeric(expDate); expDate =  datestr(expDate, 'yyyy-mm-dd'); end
@@ -27,17 +26,16 @@ if ~iscell(pathType); pathType = {pathType}; end
 if ~iscell(subject); subject = {subject}; end
 if ~iscell(expDate); expDate = {expDate}; end
 if ~iscell(expNum); expNum = {expNum}; end
-if ~iscell(datNum); datNum = {datNum}; end
 
 %% Make initial directory decisions based on dates and the computer that the program is running on.
 %Assign the drive name and directoryCheck depending on where Pip keeps his dropbox
-dataLocation = 'D:\Dropbox (Neuropixels)\MouseData\2023_CoenSit\';
+dataLocation = ['D:' filesep 'Dropbox (Neuropixels)' filesep 'MouseData' filesep '2023_CoenSit' filesep];
 
 %Assign locations for the raw data, processed data etc. depending on the access of the computer being used.
 pathOut = cell(size(subject,1), length(pathType));
 for i = 1:size(subject,1)
     %Set up paths based on the subject, date, etc.
-    processedFileName = [subject{i} '\' subject{i} '_' expDate{i}([3:4 6:7 9:10]) '_' expNum{i}  'Proc.mat'];
+    processedFileName = [subject{i} filesep subject{i} '_' expDate{i}([3:4 6:7 9:10]) '_' expNum{i}  'Proc.mat'];
     
     for j = 1:length(pathType)
         switch lower(pathType{j})                                                                             %hardcoded location of...
@@ -46,11 +44,11 @@ for i = 1:size(subject,1)
             case 'processedfolder'; pathOut{i,j} = [dataLocation subject{i}];                           %local processed data folder
             case 'processeddata'; pathOut{i,j} = [dataLocation processedFileName];                      %local processed data file
 
-            case 'explist'; pathOut{i,j} = [dataLocation 'expList.mat'];                                %the master list of experiments
-            case 'ephysrecord'; pathOut{i,j} = [dataLocation 'ePhysRecord.mat'];                        %an excel sheet with ephys records
-            case 'ephysrecordnp2'; pathOut{i,j} = [dataLocation 'ephysrecordNP2.mat'];                        %an excel sheet with ephys records
-            case 'allenatlas'; pathOut{i,j} = [driveName '\Dropbox (Neuropixels)\MouseData\Atlas\allenCCF\']; %local allan atlas directory
-            case 'probepath'; pathOut{i,j} = [dataLocation 'XHistology\' subject{i} '\probe_histIdx' expNum{i}];  %probe vectors estimated from histology
+            case 'explist'; pathOut{i,j} = [dataLocation 'XSupData' filesep 'expList.mat'];                                %the master list of experiments
+            case 'ephysrecord'; pathOut{i,j} = [dataLocation 'XSupData' filesep 'ePhysRecord.mat'];                        %an excel sheet with ephys records
+            case 'ephysrecordnp2'; pathOut{i,j} = [dataLocation 'XSupData' filesep 'ephysrecordNP2.mat'];                        %an excel sheet with ephys records
+            case 'allenatlas'; pathOut{i,j} = [dataLocation 'XSupData' filesep 'Atlas' filesep 'allenCCF' filesep]; %local allan atlas directory
+            case 'probepath'; pathOut{i,j} = [dataLocation 'XHistology' filesep subject{i} filesep 'probe_histIdx' expNum{i}];  %probe vectors estimated from histology
         end
     end
 end
